@@ -38,7 +38,7 @@
     |-- [src]                     // 应用            
     |-- .babelrc                  // babel配置
     |-- .eslintignore             // eslint忽略配置
-    |-- .eslintrc                 // eslint规则配置
+    |-- .eslintrc.json            // eslint规则配置
     |-- .gitignore                // git忽略配置
     |-- .nodemonrc                // nodemon配置
     |-- package.json              // npm
@@ -46,4 +46,5 @@
 ## 部分截图
 
 ![](./screenshots/home.gif)
+
 ![](./screenshots/user.gif)
