@@ -73,7 +73,7 @@
 │   │   ├── Editorstore.js                                  
 │   │   ├── Peoplestore.js                       
 │   │   └── Setterstore.js                       
-│   ├── service                             // 统一请求处理
+│   ├── request                             // 统一请求处理
 │   ├── template                            // webpack打包HTML模板文件
 │   ├── utils                               // 常用方法
 │   └── index.js                            // 入口
