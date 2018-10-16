@@ -14,6 +14,16 @@ class Setterstore {
         newpasswords: ""
     };
 
+    @action setState(obj) {
+        if (Object.prototype.toString.call(obj) === "[object Object]") {
+            for (var key in obj) {
+                if (key in this) {
+                    this[key] = obj[key];
+                }
+            }
+        }
+    }
+    
     @action init() {
         Promise.all([app.getUser(), app.getMessage(1)]).then(action(([u,m])=>{
             for (let key in this.form) {

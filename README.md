@@ -30,6 +30,11 @@
     npm run dev 
     访问: http://localhost:3000
 
+## 关联项目
+后端：[node-mengya](https://github.com/manyuewuxin/node-mengya)
+
+后台管理系统：[manage](https://github.com/manyuewuxin/manage)
+
 ## 项目布局
 
     |-- [build]                   // webpack构建

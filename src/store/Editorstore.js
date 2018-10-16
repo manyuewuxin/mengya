@@ -15,6 +15,15 @@ class Editorstore {
     timeID = null;
     article = null;
 
+    @action setState(obj) {
+        if (Object.prototype.toString.call(obj) === "[object Object]") {
+            for (var key in obj) {
+                if (key in this) {
+                    this[key] = obj[key];
+                }
+            }
+        }
+    }
 
     async getUMA(posts_id){
         var p = null;
