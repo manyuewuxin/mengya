@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import utils from "@store/utils";
+import utils from "@utils";
 
 @observer
 export default class Html extends Component {

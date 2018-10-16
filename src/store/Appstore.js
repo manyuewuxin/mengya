@@ -1,5 +1,5 @@
 import { observable, action, computed } from "mobx";
-import { app as ajax } from "./api";
+import { app as ajax } from "../request";
   
 class Appstore {
     @observable app = {
@@ -112,7 +112,8 @@ class Appstore {
                         posts: this.app.posts.concat(p.posts),
                         page: page+1,
                         path: path,
-                        update: false
+                        update: false,
+                        posts_loading: false
                     });
                 }
                 else if(this.app.path !== path){
@@ -121,10 +122,11 @@ class Appstore {
                         posts: [].concat(p.posts),
                         page: page+1,
                         path: path,
-                        update: false
+                        update: false,
+                        posts_loading: false
                     });
                 }   
-                this.setState("app", { user: u.user, posts_loading: false });
+                this.setState("app", { user: u.user });
                 this.setUserMessage(m,1);
             }); 
         }

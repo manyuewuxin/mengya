@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import xss from "xss"; //过滤xss
 import PropTypes from "prop-types";
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 
 import CommentHeader from "./Header";
 import CommentList from "./List";
 import CommentTextarea from "./Textarea";
 import CommentPage from "../Page";
-import CommentRmoeve from "../Remove";
+import CommentRmoeve from "../Modal/remove";
 import Loading from "./Loading";
 
 @inject("Appstore")

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import utils from "@store/utils";
-import Remove from "@components/Remove";
+import utils from "@utils";
+import Remove from "@components/Modal/remove";
 
 @inject("Appstore", "Peoplestore")
 @observer

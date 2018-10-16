@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import Hoves from "./Hoves";
-import Author from "../Author";
-import Label from "../Label";
+import Render from "./Render";
+import Author from "../../Author";
+import Label from "../../Label";
 
 @inject("Appstore")
 @observer
@@ -14,7 +14,7 @@ export default class Index extends Component {
     render() {
         if (this.props.Appstore.hove.hove_type !== null){
             return (
-                <Hoves Appstore={this.props.Appstore} render={({ hove_type, author_id, article_type})=>{
+                <Render Appstore={this.props.Appstore} render={({ hove_type, author_id, article_type})=>{
                     switch(hove_type){
                         case "author":
                         return <Author user_id={author_id} />;

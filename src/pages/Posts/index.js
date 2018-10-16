@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import List from "./List";
 import Sidebar from "./Sidebar";
 import Events from "@components/Events";
-import utils from "@store/utils";
+import utils from "@utils";
 
 @inject("Appstore")
 @Events

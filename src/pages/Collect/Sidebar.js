@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import utils from "@store/utils";
+import utils from "@utils";
 
 export default class CollectSidebar extends Component {
     static propTypes = {

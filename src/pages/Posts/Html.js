@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import utils from "@store/utils";
+import utils from "@utils";
 
 @observer
 export default class ArticleHtml extends Component {

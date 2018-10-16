@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import { toJS } from "mobx";
 import E from 'wangeditor';
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 import Label from "./Label";
 
 @inject("Editorstore")

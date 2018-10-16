@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 
 import Search from "./Search";
 import List from "./List";

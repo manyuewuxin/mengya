@@ -1,5 +1,5 @@
 # mengya
-一个类知乎文章方面的应用项目，主要由react，mobx，react-router，axios，node.js，mongodb等编写
+一个类知乎文章方面的应用项目，主要由react，mobx，react-router，axios，wangeditor，node.js，mongodb等编写
 
 ## 实现功能
 - [x] 登录注册
@@ -36,17 +36,55 @@
 后台管理系统：[manage](https://github.com/manyuewuxin/manage)
 
 ## 项目布局
+```
+.
+├── build                                   // webpack配置文件
+├── config                                  // 项目打包路径
+├── dist                                    // 打包目录
+├── screenshots                             // 项目截图
+├── src                                     // 源码目录
+│   ├── assets
+│   │   ├── css                             // css样式文件
+│   │   ├── font                            // font字体文件
+│   │   └── img                             // 公共图片文件
+│   ├── components                          // 公共组件
+│   │   ├── Author                          // 作者模态框组件
+│   │   ├── Collect                         // 收藏夹模态框组件
+│   │   ├── Header                          // 页面头部组件
+│   │   ├── Label                           // 标签模态框
+│   │   ├── Modal                           // 模态框接口
+│   │   ├── Events                          // 统一文章列表整个click和mouseover事件的高阶组件
+│   │   ├── Forward                         // 转发
+│   │   └── Page                            // 分页组件
+│   ├── pages                                   
+│   │   ├── Article                         // 单独一篇文章
+│   │   ├── Collect                         // 收藏文章列表展示
+│   │   ├── Editor                          // 编写文章
+│   │   ├── People                          // 用户个人主页
+│   │   ├── Posts                           // 文章列表展示
+│   │   ├── Setter                          // 用户设置个人资料
+│   │   ├── Login                            // 登录注册
+│   │   ├── Subscr                          // 所有标签
+│   │   ├── App.js                         
+│   │   └── router.js                           
+│   ├── store                               // mobx状态管理
+│   │   ├── index.js                        // 调出接口    
+│   │   ├── Appstore.js                       
+│   │   ├── Editorstore.js                                  
+│   │   ├── Peoplestore.js                       
+│   │   └── Setterstore.js                       
+│   ├── service                             // 统一请求处理
+│   ├── template                            // webpack打包HTML模板文件
+│   ├── utils                               // 常用方法
+│   └── index.js                            // 入口
+├── .babelrc                                // babel配置
+├── .eslintignore                           // eslint忽略配置
+├── .eslintrc.json                          // eslint配置
+├── .gitignore                              // git忽略配置
+└── package.json                            // npm
+.
 
-    |-- [build]                   // webpack构建
-    |-- [config]                  // 配置
-    |-- [public]                  // 打包输出静态目录
-    |-- [src]                     // 应用            
-    |-- .babelrc                  // babel配置
-    |-- .eslintignore             // eslint忽略配置
-    |-- .eslintrc.json            // eslint规则配置
-    |-- .gitignore                // git忽略配置
-    |-- .nodemonrc                // nodemon配置
-    |-- package.json              // npm
+```
 
 ## 部分截图
 

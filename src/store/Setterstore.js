@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import appstore from "./Appstore";
-import { app, setter } from "./api";
+import { app, setter } from "../request";
 class Setterstore {
     @observable form = {
         avatar: "",

@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { app, people } from "./api";
+import { app, people } from "../request";
 import appstore from "./Appstore";
 
 class Peoplestore {

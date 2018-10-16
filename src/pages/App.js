@@ -15,10 +15,10 @@ import Subscr from "./Subscr"; //设置用户关注标签
 
 import Header from "@components/Header"; //页面头
 
-//NO Portals API，全局共享且Modal和Hove内部需要监听 observable
-import Message from "@components/Message"; //页面全局消息提示
-import Modal from "@components/Modal";
-import Hove from "@components/Hove";
+//不是 Portals API，全局共享且Modal和Hove内部需要监听 observable
+import Message from "@components/Modal/Message"; //页面全局消息提示
+import ClickModal from "@components/Modal/click";
+import MouseoverModal from "@components/Modal/mouseover";
 
 @inject("Appstore")
 @observer
@@ -48,8 +48,8 @@ class App extends Component {
                 </Switch>
                 <Message />
                 <Login />
-                <Modal/>
-                <Hove/>
+                <ClickModal/>
+                <MouseoverModal/>
             </React.Fragment>
         );
     }

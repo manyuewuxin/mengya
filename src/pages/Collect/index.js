@@ -6,7 +6,7 @@ import ArticleEvent from "@components/Events";
 import Article from "../Posts/Article";
 import Sidebar from "./Sidebar";
 
-import utils from "@store/utils";
+import utils from "@utils";
 import Page from "@components/Page";
 
 @inject("Appstore")

@@ -1,5 +1,5 @@
 import { observable, action, toJS } from "mobx";
-import { app, editor } from "./api";
+import { app, editor } from "../request";
 import appstore from "./Appstore";
 import xss from "xss";
  

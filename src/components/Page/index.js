@@ -34,7 +34,7 @@ export default class Page extends Component {
         return this.props.count !== nextProps.count || this.state.page !== nextState.count;
     }
     UNSAFE_componentWillUpdate(nextProps, nextState) {
-        if (nextProps.count !== this.props.count) { //父组件传递count改变了
+        if (nextProps.count !== this.props.count) {
             this.arr = [];
             this.init(nextState.page, nextProps.count);
         }

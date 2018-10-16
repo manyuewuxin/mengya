@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import utils from "@store/utils";
+import utils from "@utils";
 
 export default class CommentAuthor extends Component { 
 	static propTypes = {

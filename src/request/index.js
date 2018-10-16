@@ -1,6 +1,6 @@
 import axios from "axios";
 import nprogress from "nprogress";
-import appstore from "./Appstore"; 
+import appstore from "../store/Appstore"; 
  
 const CancelToken=axios.CancelToken; //取消请求,'cancelToken':source.token，工厂返回每次只能一个cance
 axios.interceptors.request.use(

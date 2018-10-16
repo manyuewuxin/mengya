@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 
 import Login from "./Login";
 import Register from "./Register";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 
 @inject("Editorstore")
 @observer

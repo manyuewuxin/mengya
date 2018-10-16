@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import App from "./App";
-import NotFound from "./NotFound";
+import NotFound from "./404";
 import Login from "./Login";
 
 export default class Routers extends Component {

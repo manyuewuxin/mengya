@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import List from "./List";
 import Follow from "./Follow";
-import { app as ajax } from "@store/api";
+import { app as ajax } from "@request";
 
 @inject("Appstore")
 @observer

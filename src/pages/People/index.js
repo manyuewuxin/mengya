@@ -7,7 +7,7 @@ import Links from "./Links";
 import Sidebar from "./Sidebar";
 import Router from "./Router";
 import Page from "@components/Page";
-import utils from "@store/utils";
+import utils from "@utils";
 
 
 @inject("Appstore", "Peoplestore")

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import utils from "@store/utils";
+import utils from "@utils";
 
 import List from "../../Posts/List";
 import Events from "@components/Events";
-import Remove from "@components/Remove";
+import Remove from "@components/Modal/remove";
 
 //注：这个组件是唯一的交叉store引用
 @inject("Appstore", "Peoplestore")
