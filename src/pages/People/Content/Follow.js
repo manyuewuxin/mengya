@@ -24,7 +24,8 @@ export default class Followers extends Component {
     }
 
     render() {
-        this.is_myhome = this.props.Appstore.id === this.props.match.params.id ? true : false;
+        this.is_myhome =
+            this.props.Appstore.id === this.props.match.params.id ? true : false;
 
         const following = this.props.Appstore.following;
 
@@ -36,7 +37,9 @@ export default class Followers extends Component {
             return (
                 <li
                     className="people_collect_list"
-                    key={Math.random().toString(36).substring(2, 6)}>
+                    key={Math.random()
+                        .toString(36)
+                        .substring(2, 6)}>
                     <div>
                         <Link to={`/people/${author._id}/dynamic`}>
                             <img src={author.avatar} />
@@ -44,10 +47,14 @@ export default class Followers extends Component {
                     </div>
                     <div>
                         <p className="name_text">
-                            <Link to={`/people/${author._id}/dynamic`}>{author.name}</Link>
+                            <Link to={`/people/${author._id}/dynamic`}>
+                                {author.name}
+                            </Link>
                         </p>
                         <p className="information_text">{author.information}</p>
-                        <p className="detailed_text">{`${author.create_p_count} 篇文章 · ${author.followers_count} 关注者`}</p>
+                        <p className="detailed_text">{`${
+                            author.create_p_count
+                        } 篇文章 · ${author.followers_count} 关注者`}</p>
                     </div>
                     <div>
                         <a

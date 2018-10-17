@@ -17,13 +17,17 @@ export default class Index extends Component {
         const { Appstore, location, history } = this.props;
 
         if (Appstore.app.loginPath !== null) {
-
-            return <Controller history={history} pathname={Appstore.app.loginPath} type="click" />;
-            
+            return (
+                <Controller
+                    history={history}
+                    pathname={Appstore.app.loginPath}
+                    type="click"
+                />
+            );
         } else if (location.pathname === "/signin" || location.pathname === "/signup") {
-
-            return <Controller history={history} pathname={location.pathname} type="path" />;
-
+            return (
+                <Controller history={history} pathname={location.pathname} type="path" />
+            );
         }
         return null;
     }

@@ -7,12 +7,12 @@ import { withRouter } from "react-router-dom";
 @withRouter
 @observer
 export default class Center extends Component {
-    static propTypes = { 
+    static propTypes = {
         Editorstore: PropTypes.object,
         history: PropTypes.object
     };
     render() {
-        if(this.props.Editorstore.message===null) return null;
+        if (this.props.Editorstore.message === null) return null;
         const { message } = this.props.Editorstore;
         return (
             <div className="center">
@@ -24,11 +24,14 @@ export default class Center extends Component {
         );
     }
     componentDidUpdate() {
-        if(this.props.Editorstore.message!==null && this.props.Editorstore.message.is){
+        if (
+            this.props.Editorstore.message !== null &&
+            this.props.Editorstore.message.is
+        ) {
             this.timeID = window.setTimeout(() => {
                 this.props.Editorstore.setMessage(null);
                 this.props.Editorstore.empty();
-                window.scroll(0,0);
+                window.scroll(0, 0);
                 window.clearTimeout(this.timeID);
             }, 1000);
         }

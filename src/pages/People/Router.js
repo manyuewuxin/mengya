@@ -5,7 +5,6 @@ import Article from "./Content/Article";
 import Collect from "./Content/Collect";
 import Follow from "./Content/Follow";
 
-
 export default class PeopleRouter extends Component {
     render() {
         return (
@@ -15,9 +14,18 @@ export default class PeopleRouter extends Component {
                 <Route path="/people/:id/collect" component={Collect} />
                 <Route path="/people/:id/following" component={Follow} />
                 <Route path="/people/:id/followers" component={Follow} />
-                <Route render={()=>{
-                    return <Redirect to={{pathname:'/404',state:{ error: window.location.href}}}/>;
-                }} />
+                <Route
+                    render={() => {
+                        return (
+                            <Redirect
+                                to={{
+                                    pathname: "/404",
+                                    state: { error: window.location.href }
+                                }}
+                            />
+                        );
+                    }}
+                />
             </Switch>
         );
     }

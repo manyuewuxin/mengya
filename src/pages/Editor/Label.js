@@ -25,23 +25,22 @@ export default class Label extends Component {
         const value = e.target.value;
         if (e.target.value === "") {
             this.quertList = [];
-            this.setState({ quertList: [], value:"" });
-        } 
-        else if(this.props.Editorstore.type.length < 3) {
-            if(this.timeID!==null){
+            this.setState({ quertList: [], value: "" });
+        } else if (this.props.Editorstore.type.length < 3) {
+            if (this.timeID !== null) {
                 window.clearTimeout(this.timeID);
                 this.timeID = null;
             }
-            this.timeID = window.setTimeout(()=>{
-                ajax.getLabel(`search=${value}`, 1).then(({ label })=>{
-                    if(this.state.value !== "") this.setState({ quertList: label });
+            this.timeID = window.setTimeout(() => {
+                ajax.getLabel(`search=${value}`, 1).then(({ label }) => {
+                    if (this.state.value !== "") this.setState({ quertList: label });
                     window.clearTimeout(this.timeID);
                     this.timeID = null;
                 });
-            },0);
+            }, 0);
         }
         this.setState({ value: e.target.value });
-    }  
+    }
     setLabel(e) {
         e.stopPropagation();
         if (e.target.dataset.removeindex) {
@@ -60,23 +59,37 @@ export default class Label extends Component {
     render() {
         const list = this.props.Editorstore.type.map((type, index) => {
             return (
-                <li key={Math.random().toString(36).substring(2, 6)}>
-                    <button>{type}<i data-removeindex={index} className="icon_closes" /></button>
+                <li
+                    key={Math.random()
+                        .toString(36)
+                        .substring(2, 6)}>
+                    <button>
+                        {type}
+                        <i data-removeindex={index} className="icon_closes" />
+                    </button>
                 </li>
             );
         });
         const quertLists = this.state.quertList.map((label) => (
-            <li key={Math.random().toString(36).substring(2, 6)} data-querylabel={label.type}>{label.type}</li>
+            <li
+                key={Math.random()
+                    .toString(36)
+                    .substring(2, 6)}
+                data-querylabel={label.type}>
+                {label.type}
+            </li>
         ));
 
         return (
             <div onClick={this.setLabel}>
                 <div className="editor_label">
                     <ul>{list}</ul>
-                    <input 
-                        type="text" 
-                        name="label" 
-                        placeholder={`为文章添加标签${this.props.Editorstore.type.length}/3`} 
+                    <input
+                        type="text"
+                        name="label"
+                        placeholder={`为文章添加标签${
+                            this.props.Editorstore.type.length
+                        }/3`}
                         value={this.state.value}
                         onChange={this.change}
                     />

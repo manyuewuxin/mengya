@@ -26,7 +26,13 @@ axios.interceptors.response.use(
                 break;
 
             case 403:
-                appstore.login("/signin", { text: "你还没有登录或登录状态已到期", is: false });
+                if(appstore.id !== null){
+                    appstore.quit();
+                    appstore.login("/signin", { text: "你的登录状态已到期，请重新登录", is: false });
+                }
+                else{
+                    appstore.login("/signin", { text: "你还没有登录，请登录后在操作", is: false });
+                }
                 break;
 
             case 404:

@@ -27,7 +27,8 @@ export default class Search extends Component {
     }
     keyup(e) {
         e.stopPropagation();
-        if (e.key === "Enter" && this.state.value!=="") this.send(this.state.value.replace(/\s+/g, ""));
+        if (e.key === "Enter" && this.state.value !== "")
+            this.send(this.state.value.replace(/\s+/g, ""));
     }
     submit(e) {
         e.stopPropagation();

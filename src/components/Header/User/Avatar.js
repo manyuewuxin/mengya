@@ -28,7 +28,9 @@ export default class User extends Component {
         return (
             <div className="user_avatar" onMouseLeave={this.close}>
                 <img src={this.props.Appstore.user.avatar} onClick={this.action} />
-                {open === "setter" ? <Menu left={left} Appstore={this.props.Appstore} /> : null}
+                {open === "setter" ? (
+                    <Menu left={left} Appstore={this.props.Appstore} />
+                ) : null}
             </div>
         );
     }

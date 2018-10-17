@@ -22,11 +22,11 @@ export default class Button extends Component {
 
     send(e) {
         e.stopPropagation();
-        if (this.props.captcha>0) {
+        if (this.props.captcha > 0) {
             if (this.captcha === this.state.value) {
                 this.props.login();
             } else {
-                this.setState({ captcha: this.state.captcha+1, error: "验证码错误" });
+                this.setState({ captcha: this.state.captcha + 1, error: "验证码错误" });
             }
         } else {
             this.props.login();
@@ -35,7 +35,7 @@ export default class Button extends Component {
     change(e) {
         e.stopPropagation();
         this.setState({ value: e.target.value });
-        if(e.target.value === this.captcha ) this.setState({ error: null });
+        if (e.target.value === this.captcha) this.setState({ error: null });
     }
     createCaptcha() {
         const canvas = document.querySelector("#canvas"); //获取画布
@@ -67,7 +67,7 @@ export default class Button extends Component {
         const { value, error } = this.state;
         return (
             <div>
-                {this.props.captcha>0 ? (
+                {this.props.captcha > 0 ? (
                     <div>
                         <input
                             className="sign_captcha"
@@ -92,7 +92,11 @@ export default class Button extends Component {
                     </div>
                 ) : null}
                 <button
-                    className={this.props.pathname === "/signin" ? "signin_submit" : "signup_submit"}
+                    className={
+                        this.props.pathname === "/signin"
+                            ? "signin_submit"
+                            : "signup_submit"
+                    }
                     onClick={this.send}>
                     {this.props.pathname === "/signin" ? "登录" : "注册"}
                 </button>
@@ -100,9 +104,11 @@ export default class Button extends Component {
         );
     }
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.captcha !== prevProps.captcha || this.state.captcha !== prevState.captcha) {
+        if (
+            this.props.captcha !== prevProps.captcha ||
+            this.state.captcha !== prevState.captcha
+        ) {
             this.createCaptcha();
         }
     }
 }
- 

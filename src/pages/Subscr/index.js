@@ -55,14 +55,13 @@ export default class Index extends Component {
         this.time = window.setTimeout(() => {
             const scrollTop = Math.round(document.documentElement.scrollTop); //获取滚动高度像素
             const scrollHeight = scrollTop + window.innerHeight; //滚动高度像素+浏览器窗口屏幕可见高度
-            if (scrollHeight >= document.documentElement.scrollHeight - 100) {  //等于或大于整个文档高度时也就是滚动到底部时执行请求
-
+            if (scrollHeight >= document.documentElement.scrollHeight - 100) {
                 const { label, page, query } = this.state;
-                
                 ajax.getLabel(query, page).then((data) => {
                     const arr = label.concat(data.label);
 
-                    if(data.label.length>0) this.setState({ label: arr, page: page + 1 });
+                    if (data.label.length > 0)
+                        this.setState({ label: arr, page: page + 1 });
 
                     window.clearTimeout(this.time);
                     this.time = null;
@@ -74,7 +73,6 @@ export default class Index extends Component {
         if (this.state.label === null) return <div />;
         return (
             <div className="posts label">
-
                 <Search search={this.search} path={this.props.match.params.path} />
                 <List
                     label={this.state.label}
@@ -88,7 +86,7 @@ export default class Index extends Component {
         ajax.getLabel(`type=${this.props.match.params.path}`, 1).then(({ label }) => {
             this.setState({
                 label: label,
-                page: this.state.page+1,
+                page: this.state.page + 1,
                 query: `type=${this.props.match.params.path}`
             });
             this.props.Appstore.getUser(1);
@@ -100,7 +98,7 @@ export default class Index extends Component {
             ajax.getLabel(`type=${this.props.match.params.path}`, 1).then(({ label }) => {
                 this.setState({
                     label: label,
-                    page: this.state.page+1,
+                    page: this.state.page + 1,
                     query: `type=${this.props.match.params.path}`,
                     updataPath: false
                 });

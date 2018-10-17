@@ -12,4 +12,3 @@ export default class SidebarList extends Component {
         );
     }
 }
-//import Label from "./Label"; <Label location={this.props.location} label={this.props.Appstore.label}/> 

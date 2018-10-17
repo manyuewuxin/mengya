@@ -22,7 +22,7 @@ export default class Index extends Component {
         this.getoffsetTop = this.getoffsetTop.bind(this);
     }
     getoffsetTop(e) {
-        if(e.target.dataset.click==="read_comment"){
+        if (e.target.dataset.click === "read_comment") {
             e.stopPropagation();
             window.scroll(0, e.target.offsetTop);
         }
@@ -39,23 +39,18 @@ export default class Index extends Component {
                         count={article.like.length}
                         author={article.author[0]}
                     />
-                    <ArticleHtml 
-                        html={article.html}
-                        date={article.date}
-                    />
-                    <ArticleType 
-                        type={article.type}
-                    />  
+                    <ArticleHtml html={article.html} date={article.date} />
+                    <ArticleType type={article.type} />
                     <div onClick={this.getoffsetTop}>
-                    <ArticleAction
-                        is_like={article.like.includes(this.props.Appstore.id)}
-                        open_comment={false}
-                        open_article={false}
-                        index={0}
-                        count={article.comment_count}
-                        length={article.like.length}
-                        is_my_people={false}
-                    />
+                        <ArticleAction
+                            is_like={article.like.includes(this.props.Appstore.id)}
+                            open_comment={false}
+                            open_article={false}
+                            index={0}
+                            count={article.comment_count}
+                            length={article.like.length}
+                            is_my_people={false}
+                        />
                     </div>
                     <ArticleComment
                         posts_id={article._id}
@@ -70,6 +65,11 @@ export default class Index extends Component {
         this.props.Appstore.getArticle(this.props.match.params.id);
     }
     componentWillUnmount() {
-        this.props.Appstore.setState("app", { article_loading: true, posts:[], read_article:[], read_comment:[] });
+        this.props.Appstore.setState("app", {
+            article_loading: true,
+            posts: [],
+            read_article: [],
+            read_comment: []
+        });
     }
 }

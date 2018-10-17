@@ -22,14 +22,18 @@ export default class Dynamic extends Component {
             return (
                 <li
                     className="people_dynamic"
-                    key={Math.random().toString(36).substring(2, 6)}>
+                    key={Math.random()
+                        .toString(36)
+                        .substring(2, 6)}>
                     <div className="actions-type">
                         <p>{this.type[d.dynamic.dynamic_type]}</p>
                         <p>{`${dt.date} ${dt.time}`}</p>
                     </div>
                     <div className="people_posts">
                         <Link to={`/p/${d.posts[0]._id}`}>{d.posts[0].title}</Link>
-                        {d.posts[0].image!==null ? <img src={d.posts[0].image} /> : null}
+                        {d.posts[0].image !== null ? (
+                            <img src={d.posts[0].image} />
+                        ) : null}
                     </div>
                 </li>
             );

@@ -25,8 +25,11 @@ export default class PeopleHeader extends Component {
         }
     }
     render() {
-        this.is_myhome = this.props.Appstore.id === this.props.match.params.id ? true : false;
-        const is_follow = this.props.Appstore.following.includes(this.props.match.params.id)
+        this.is_myhome =
+            this.props.Appstore.id === this.props.match.params.id ? true : false;
+        const is_follow = this.props.Appstore.following.includes(
+            this.props.match.params.id
+        )
             ? "已关注"
             : "关注他";
         const style = is_follow === "已关注" ? "is_follow_button" : "no_follow_button";

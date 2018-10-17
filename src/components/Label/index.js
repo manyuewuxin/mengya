@@ -5,7 +5,7 @@ import { app as ajax } from "@request";
 
 @inject("Appstore")
 @observer
-export default class Index extends Component { //Img直接从知乎跨域获取，建议使用爬虫保存mongodb
+export default class Index extends Component {
     static propTypes = {
         Appstore: PropTypes.object,
         type: PropTypes.string.isRequired
@@ -25,11 +25,11 @@ export default class Index extends Component { //Img直接从知乎跨域获取�
     }
     mouseover(e) {
         e.stopPropagation();
-        this.props.Appstore.setState("hove",{ opacity: 1 });
+        this.props.Appstore.setState("hove", { opacity: 1 });
     }
     mouseLeave(e) {
         e.stopPropagation();
-        this.props.Appstore.setState("hove",{ opacity: 0 });
+        this.props.Appstore.setState("hove", { opacity: 0 });
     }
     render() {
         if (this.state.label === null) {

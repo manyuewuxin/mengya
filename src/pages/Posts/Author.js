@@ -18,7 +18,12 @@ export default class ArticleAuthor extends Component {
                     <img src={author.avatar} data-hove="author" data-index={index} />
                 </Link>
                 <div>
-                    <Link to={`/people/${author._id}/dynamic`} data-hove="author" data-index={index}>{author.name}</Link>
+                    <Link
+                        to={`/people/${author._id}/dynamic`}
+                        data-hove="author"
+                        data-index={index}>
+                        {author.name}
+                    </Link>
                     <span>{`，${author.information}`}</span>
                 </div>
             </div>

@@ -9,7 +9,6 @@ import Router from "./Router";
 import Page from "@components/Page";
 import utils from "@utils";
 
-
 @inject("Appstore", "Peoplestore")
 @observer
 export default class People extends Component {
@@ -23,7 +22,10 @@ export default class People extends Component {
     UNSAFE_componentWillReceiveProps(nextProps) {
         const newlocation = nextProps.location;
         const location = this.props.location;
-        if (location.pathname !== newlocation.pathname || location.search !== newlocation.search ){
+        if (
+            location.pathname !== newlocation.pathname ||
+            location.search !== newlocation.search
+        ) {
             this.props.Peoplestore.setState({ update: true });
         }
     }
@@ -39,13 +41,17 @@ export default class People extends Component {
                         <Links location={location} match={match} />
                         {Peoplestore.update ? null : <Router />}
                     </div>
-                    <Page 
-                        count={Peoplestore.count} 
-                        setPage={`${location.pathname}?`} 
+                    <Page
+                        count={Peoplestore.count}
+                        setPage={`${location.pathname}?`}
                         currentStyle="posts_ispage"
-                        ulStyle="page"/>
+                        ulStyle="page"
+                    />
                 </div>
-                <Sidebar author={Peoplestore.author} is_myhome={Appstore.id === match.params.id} />
+                <Sidebar
+                    author={Peoplestore.author}
+                    is_myhome={Appstore.id === match.params.id}
+                />
             </div>
         );
     }

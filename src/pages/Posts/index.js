@@ -22,7 +22,10 @@ export default class Content extends Component {
         this.scroll = this.scroll.bind(this);
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.location.pathname !== this.props.location.pathname || nextProps.location.search !== this.props.location.search){
+        if (
+            nextProps.location.pathname !== this.props.location.pathname ||
+            nextProps.location.search !== this.props.location.search
+        ) {
             this.props.Appstore.setState("app", { update: true });
         }
     }
@@ -35,7 +38,8 @@ export default class Content extends Component {
         this.time = window.setTimeout(() => {
             const scrollTop = Math.round(document.documentElement.scrollTop); //获取滚动高度像素
             const scrollHeight = scrollTop + window.innerHeight; //滚动高度像素+浏览器窗口屏幕可见高度
-            if (scrollHeight >= document.documentElement.scrollHeight - 50) {  //等于或大于整个文档高度时也就是滚动到底部时执行请求
+            if (scrollHeight >= document.documentElement.scrollHeight - 50) {
+                //等于或大于整个文档高度时也就是滚动到底部时执行请求
 
                 const { path, page } = this.props.Appstore.app;
                 this.props.Appstore.getPosts(path, page);
@@ -45,35 +49,32 @@ export default class Content extends Component {
         }, 100);
     }
 
-    req({ location }){
-        if(location.pathname==="/"){
+    req({ location }) {
+        if (location.pathname === "/") {
             const search = utils.search(location.search.split("?")[1]);
             const type = search.type || "all";
-            this.props.Appstore.getPosts(`type=${type}`,1);
-        }
-        else if(location.pathname==="/hot"){
-            this.props.Appstore.setState("app",{ read_article:[], read_comment:[] });
-            this.props.Appstore.getPosts(`hot=true`,1);
-        }
-        else if(location.pathname==="/search"){
+            this.props.Appstore.getPosts(`type=${type}`, 1);
+        } else if (location.pathname === "/hot") {
+            this.props.Appstore.setState("app", { read_article: [], read_comment: [] });
+            this.props.Appstore.getPosts(`hot=true`, 1);
+        } else if (location.pathname === "/search") {
             const search = utils.search(location.search.split("?")[1]);
-            this.props.Appstore.setState("app",{ read_article:[], read_comment:[] });
-            this.props.Appstore.getPosts(`search=${search.query}`,1);
-        }
-        else if(location.pathname==="/about"){
-            this.props.Appstore.getPosts("search=关于本项目",1);
+            this.props.Appstore.setState("app", { read_article: [], read_comment: [] });
+            this.props.Appstore.getPosts(`search=${search.query}`, 1);
+        } else if (location.pathname === "/about") {
+            this.props.Appstore.getPosts("search=关于本项目", 1);
         }
     }
-    
+
     render() {
-        if(this.props.Appstore.app.posts_loading) return null;
-        return(
+        if (this.props.Appstore.app.posts_loading) return null;
+        return (
             <div className="posts">
                 <div className="posts_left">
-                    <List posts={this.props.Appstore.posts} is_my_people={false}/>
+                    <List posts={this.props.Appstore.posts} is_my_people={false} />
                 </div>
                 <div className="posts_right">
-                    <Sidebar/>
+                    <Sidebar />
                 </div>
             </div>
         );
@@ -85,14 +86,20 @@ export default class Content extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.Appstore.app.update) this.req(this.props);  
+        if (this.props.Appstore.app.update) this.req(this.props);
     }
     componentWillUnmount() {
-        this.props.Appstore.setState("app", { posts_loading: true, update:false, posts:[], read_article:[], read_comment:[], page:1 });
+        this.props.Appstore.setState("app", {
+            posts_loading: true,
+            update: false,
+            posts: [],
+            read_article: [],
+            read_comment: [],
+            page: 1
+        });
         window.removeEventListener("scroll", this.scroll, false);
     }
 }
-
 
 /*
     UNSAFE_componentWillReceiveProps(nextProps) {

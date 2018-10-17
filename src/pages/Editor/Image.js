@@ -22,13 +22,12 @@ export default class Image extends Component {
             e.target.value = "";
         }
     }
-    action(e){
+    action(e) {
         e.stopPropagation();
         const { className } = e.target;
-        if(className=='icon_cameras' || className=='icon_camera'){
-             this.refx.current.click();
-        }
-        else if(className=='icon_removes'){
+        if (className == "icon_cameras" || className == "icon_camera") {
+            this.refx.current.click();
+        } else if (className == "icon_removes") {
             this.props.Editorstore.removeTitleImage();
         }
     }

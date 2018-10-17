@@ -40,9 +40,6 @@ export default class Account extends Component {
         e.stopPropagation();
         this.props.Setterstore.setInform();
     }
-    componentDidMount() {
-        this.props.Setterstore.init();
-    }
     render() {
         return (
             <div className="setter_list">
@@ -62,4 +59,4 @@ export default class Account extends Component {
     componentDidMount() {
         this.props.Setterstore.init();
     }
-} 
+}

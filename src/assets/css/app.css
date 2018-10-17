@@ -1612,7 +1612,7 @@ font-size: 13px;
 }
 
 .collect_author a:nth-child(2){
-	color: #000;
+	color: #333;
 	font-size: 15px;
 	font-weight: 600;
 }

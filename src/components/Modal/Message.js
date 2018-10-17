@@ -12,8 +12,8 @@ export default class Message extends Component {
         super(props);
         this.time = null;
         this.style = props.Appstore.styel || "animation";
-        this.animationiteration = this.animationiteration.bind(this); 
-        this.animationend = this.animationend.bind(this); 
+        this.animationiteration = this.animationiteration.bind(this);
+        this.animationend = this.animationend.bind(this);
     }
     animationiteration(e) {
         e.stopPropagation();
@@ -22,10 +22,10 @@ export default class Message extends Component {
             window.clearTimeout(this.time);
             this.time = null;
         }
-        e.target.style.animationPlayState = "paused"; 
+        e.target.style.animationPlayState = "paused";
 
         this.time = window.setTimeout(() => {
-            e.target.style.animationPlayState = "running"; 
+            e.target.style.animationPlayState = "running";
             window.clearTimeout(this.time);
             this.time = null;
         }, 1500);
@@ -37,7 +37,7 @@ export default class Message extends Component {
     }
 
     render() {
-        if(this.props.Appstore.message === null) return null;
+        if (this.props.Appstore.message === null) return null;
         const { message } = this.props.Appstore;
         return (
             <div
@@ -49,7 +49,7 @@ export default class Message extends Component {
             </div>
         );
     }
- 
+
     componentDidUpdate() {
         if (this.props.Appstore.queue !== null) {
             var queue = this.props.Appstore.queue;
@@ -58,4 +58,3 @@ export default class Message extends Component {
         }
     }
 }
- 

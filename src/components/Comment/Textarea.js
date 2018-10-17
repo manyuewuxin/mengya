@@ -30,7 +30,7 @@ export default class CommentTextarea extends Component {
         const { value } = this.state;
 
         this.props.create(value);
-        this.setState({ value: ""});
+        this.setState({ value: "" });
     }
     render() {
         return (

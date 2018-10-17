@@ -15,13 +15,17 @@ export default class PeopleSwitchList extends Component {
         ];
         const match = this.props.match;
         const list = arr.map((route) => {
-            const key = Math.random().toString(36).substring(2, 6);
+            const key = Math.random()
+                .toString(36)
+                .substring(2, 6);
             return (
                 <li key={key}>
                     <Link
                         to={`/people/${match.params.id}/${route.path}`}
                         className={
-                            new RegExp(route.match, "i").test(match.params.path) ? "switch" : ""
+                            new RegExp(route.match, "i").test(match.params.path)
+                                ? "switch"
+                                : ""
                         }>
                         {route.text}
                     </Link>

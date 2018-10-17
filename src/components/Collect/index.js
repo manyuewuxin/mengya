@@ -24,7 +24,8 @@ export default class Index extends Component {
             is_create: false,
             page: 1, //滚动加载size
             name: "",
-            image: "/collect/dafault.png"
+            image: "/collect/dafault.png",
+            loading: true
         };
 
         this.change = this.change.bind(this);
@@ -41,7 +42,7 @@ export default class Index extends Component {
 
         this.time = null;
         this.refc = React.createRef(); //控制过渡动画
-        this.refx = React.createRef();  //获取elem
+        this.refx = React.createRef(); //获取elem
     }
     change(e) {
         e.stopPropagation();
@@ -57,21 +58,21 @@ export default class Index extends Component {
     changeFile(e) {
         e.stopPropagation();
         if (e.target.files.length > 0) {
-            this.uploadImg(e.target.files[0]).then((url)=>{
+            this.uploadImg(e.target.files[0]).then((url) => {
                 this.setState({ image: url });
             });
         }
     }
-    async uploadImg(file){
+    async uploadImg(file) {
         const { image } = this.state;
-        const { url } = await ajax.uploadFile("collect",file);
-        try{
-            await ajax.removeFile({url:image,folder:"collect"});
-        }catch(err){
+        const { url } = await ajax.uploadFile("collect", file);
+        try {
+            await ajax.removeFile({ url: image, folder: "collect" });
+        } catch (err) {
             console.log(err);
         }
         return url;
-    } 
+    }
     switchs(e) {
         e.stopPropagation();
         if (this.state.is_create === false) {
@@ -86,33 +87,39 @@ export default class Index extends Component {
         if (e.target.dataset.index) {
             const { posts_id, author_id } = this.props;
             const { collect } = this.state;
-            const index  = Number(e.target.dataset.index);
+            const index = Number(e.target.dataset.index);
             const collect_id = collect[index]._id;
             const indexOf = collect[index].collect_article.indexOf(posts_id);
-            const action = indexOf !== -1 ? "remove": "add"; //获取收藏夹是否收藏了文章
+            const action = indexOf !== -1 ? "remove" : "add"; //获取收藏夹是否收藏了文章
 
-            ajax.updateCollect({ collect_id, action, posts_id, author_id }).then(()=>{
-                if(indexOf !== -1){
-                    collect[index].collect_article.splice(indexOf,1);
-                    collect[index].collect_count = collect[index].collect_count-1;
-                }
-                else {
+            ajax.updateCollect({ collect_id, action, posts_id, author_id }).then(() => {
+                if (indexOf !== -1) {
+                    collect[index].collect_article.splice(indexOf, 1);
+                    collect[index].collect_count = collect[index].collect_count - 1;
+                } else {
                     collect[index].collect_article.push(posts_id);
-                    collect[index].collect_count = collect[index].collect_count+1;              
+                    collect[index].collect_count = collect[index].collect_count + 1;
                 }
-                this.setState({ collect:collect });
+                this.setState({ collect: collect });
             });
         }
     }
-    create() { 
+    create() {
         if (/^[a-zA-Z0-9\u4e00-\u9fa5]{1,20}$/.test(this.state.name)) {
             const { collect, image, name } = this.state;
-            ajax.createCollect({ image, name }).then((data)=>{
+            ajax.createCollect({ image, name }).then((data) => {
                 collect.unshift(data.collect);
-                this.setState({ collect: collect, is_create: false, image: "/collect/dafault.png" });
+                this.setState({
+                    collect: collect,
+                    is_create: false,
+                    image: "/collect/dafault.png"
+                });
             });
         } else {
-            this.props.Appstore.setMessage({ text: "收藏夹名字必须为1-8个字符", is: false });
+            this.props.Appstore.setMessage({
+                text: "收藏夹名字必须为1-8个字符",
+                is: false
+            });
         }
     }
 
@@ -122,13 +129,13 @@ export default class Index extends Component {
     }
     animationend(e) {
         e.stopPropagation();
-        this.props.Appstore.setState("modal",{ open: null });
+        this.props.Appstore.setState("modal", { open: null });
     }
     continues(e) {
         e.stopPropagation();
-        ajax.removeFile({url:this.state.image,folder:"collect"}).then(()=>{ //如果在创建页面关闭则删除他，默认创建成功初始化是dafault.png
+        ajax.removeFile({ url: this.state.image, folder: "collect" }).finally(() => {
             this.refc.current.parentElement.style.opacity = 0;
-            this.refc.current.style.animationPlayState = "running"; //继续 
+            this.refc.current.style.animationPlayState = "running";
         });
     }
 
@@ -139,16 +146,17 @@ export default class Index extends Component {
             this.time = null;
         }
         this.time = window.setTimeout(() => {
-            const scrollTop = Math.round(document.documentElement.scrollTop); //获取滚动高度像素
-            const scrollHeight = scrollTop + window.innerHeight; //滚动高度像素+浏览器窗口屏幕可见高度
-            if (scrollHeight >= document.documentElement.scrollHeight - 50) {  //等于或大于整个文档高度时也就是滚动到底部时执行请求
+            const scrollTop = Math.round(document.documentElement.scrollTop);
+            const scrollHeight = scrollTop + window.innerHeight; 
+            if (scrollHeight >= document.documentElement.scrollHeight - 50) {
 
                 const { collect, page } = this.state;
-                
+
                 ajax.getCollectList(page).then((data) => {
                     const arr = collect.concat(data.collect);
 
-                    if(data.collect.length>0) this.setState({ collect: arr, page: page + 1 });
+                    if (data.collect.length > 0)
+                        this.setState({ collect: arr, page: page + 1 });
 
                     window.clearTimeout(this.time);
                     this.time = null;
@@ -158,37 +166,50 @@ export default class Index extends Component {
     }
 
     render() {
+        if (this.state.loading) return null;
         const { is_create, image, name, collect } = this.state;
         return (
             <div className="animation_opacity">
-                <div className="animation_backdrop"></div>
-                <div className="collect" ref={this.refc} onAnimationIteration={this.animationiteration} onAnimationEnd={this.animationend}>
-                    <CollectTitle is_create={is_create} continues={this.continues}/>
-                        {is_create ? (
-                            <CollectCreate
-                                image={image}
-                                refx={this.refx}
-                                name={name}
-                                openFile={this.openFile}
-                                changeFile={this.changeFile}
-                                change={this.change}
-                            />
-                        ) : (
-                            <CollectList
-                                posts_id={this.props.posts_id}
-                                collect={collect}
-                                collectArticle={this.collectArticle}
-                                scroll={this.scroll}
-                            />
-                        )}
+                <div className="animation_backdrop" />
+                <div
+                    className="collect"
+                    ref={this.refc}
+                    onAnimationIteration={this.animationiteration}
+                    onAnimationEnd={this.animationend}>
+                    <CollectTitle is_create={is_create} continues={this.continues} />
+                    {is_create ? (
+                        <CollectCreate
+                            image={image}
+                            refx={this.refx}
+                            name={name}
+                            openFile={this.openFile}
+                            changeFile={this.changeFile}
+                            change={this.change}
+                        />
+                    ) : (
+                        <CollectList
+                            posts_id={this.props.posts_id}
+                            collect={collect}
+                            collectArticle={this.collectArticle}
+                            scroll={this.scroll}
+                        />
+                    )}
                     <CollectSwitch switchs={this.switchs} is_create={is_create} />
                 </div>
             </div>
         );
     }
     componentDidMount() {
-        ajax.getCollectList(1).then(({ collect })=>{
-            this.setState({ collect: collect, page: this.state.page+1 });
-        });
-    }   
+        ajax.getCollectList(1)
+            .then(({ collect }) => {
+                this.setState({
+                    collect: collect,
+                    page: this.state.page + 1,
+                    loading: false
+                });
+            })
+            .catch(() => {
+                this.props.Appstore.setState("modal", { open: null });
+            });
+    }
 }

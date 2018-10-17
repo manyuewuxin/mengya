@@ -17,15 +17,15 @@ export default class ArticleContainer extends Component {
         article: PropTypes.object.isRequired,
         is_my_people: PropTypes.bool.isRequired,
         index: PropTypes.number.isRequired
-    }; 
+    };
     render() {
         const { article, is_my_people, index } = this.props;
         const { read_article, read_comment } = this.props.Appstore.app;
         const user_id = this.props.Appstore.id;
         return (
             <article>
-                <ArticleType type={article.type} index={index}/>
-                <ArticleAuthor author={article.author} index={index}/> 
+                <ArticleType type={article.type} index={index} />
+                <ArticleAuthor author={article.author} index={index} />
                 <ArticleHtml
                     article={article}
                     open_article={read_article.includes(index)}
@@ -41,11 +41,14 @@ export default class ArticleContainer extends Component {
                     length={article.like.length}
                 />
                 {read_comment.includes(index) ? (
-                    <Comment posts_id={article._id} author_id={article.author_id} p_index={index} />
+                    <Comment
+                        posts_id={article._id}
+                        author_id={article.author_id}
+                        p_index={index}
+                    />
                 ) : null}
             </article>
         );
     }
     //componentDidMount(){console.log("componentDidMount");}
 }
-

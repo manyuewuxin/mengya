@@ -5,20 +5,21 @@ import { Link } from "react-router-dom";
 
 @observer
 export default class ArticleType extends Component {
-	static propTypes = {
-		type: PropTypes.object
-	}
-	render(){
-		const { type } = this.props;
+    static propTypes = {
+        type: PropTypes.object
+    };
+    render() {
+        const { type } = this.props;
         const list = type.map((types) => {
-            return(
-                <li key={Math.random().toString(36).substring(2, 6)}>
-                    <Link to={`/?type=${types}&page=1`}>
-                        {types}
-                    </Link>
+            return (
+                <li
+                    key={Math.random()
+                        .toString(36)
+                        .substring(2, 6)}>
+                    <Link to={`/?type=${types}&page=1`}>{types}</Link>
                 </li>
             );
         });
         return <ul className="article_label">{list}</ul>;
-	}
+    }
 }

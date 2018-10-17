@@ -25,7 +25,10 @@ app.use(
 );
 
 app.use(
-    proxyMiddleware(config.dev.context, { target: config.dev.proxypath, changeOrigin: true })
+    proxyMiddleware(config.dev.context, {
+        target: config.dev.proxypath,
+        changeOrigin: true
+    })
 );
 
 app.use(express.static(path.resolve(__dirname, "../dist")));

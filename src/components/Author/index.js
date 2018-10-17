@@ -31,11 +31,11 @@ export default class Author extends Component {
 
     mouseover(e) {
         e.stopPropagation();
-        this.props.Appstore.setState("hove",{ opacity: 1 });
+        this.props.Appstore.setState("hove", { opacity: 1 });
     }
     mouseLeave(e) {
         e.stopPropagation();
-        this.props.Appstore.setState("hove",{ opacity: 0 });
+        this.props.Appstore.setState("hove", { opacity: 0 });
     }
     render() {
         if (this.state.author === null) {
@@ -56,7 +56,9 @@ export default class Author extends Component {
     }
 
     componentDidMount() {
-        ajax.getAuthor(this.props.user_id, false).then(({ author }) => this.setState({ author }));
+        ajax.getAuthor(this.props.user_id, false).then(({ author }) =>
+            this.setState({ author })
+        );
     }
     //componentWillUnmount(){}
 }
