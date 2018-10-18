@@ -35,7 +35,7 @@ class App extends Component {
                     <Route exact path="/" component={Posts} />
                     <Route path="/search" component={Posts} />
                     <Route path="/hot" component={Posts} />
-                    <Route path="/about" component={Posts} />
+                    <Route path="/follow" component={Posts} />
                     <Route path="/p/:id/" component={Article} />
                     <Route path="/setter/:path" component={Setter} />
                     <Route path="/people/:id/:path" component={People} />

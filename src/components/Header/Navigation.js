@@ -26,10 +26,10 @@ export default class Navigation extends Component {
                         热门
                     </Link>
                     <Link
-                        className={pathname == "/about" ? "is_home" : ""}
-                        to="/about">
+                        className={pathname == "/follow" ? "is_home" : ""}
+                        to="/follow">
                         <i className="icon_contact" />
-                        关于
+                        关注
                     </Link>
                 </div>
             </div>

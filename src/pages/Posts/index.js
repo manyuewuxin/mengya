@@ -56,13 +56,13 @@ export default class Content extends Component {
             this.props.Appstore.getPosts(`type=${type}`, 1);
         } else if (location.pathname === "/hot") {
             this.props.Appstore.setState("app", { read_article: [], read_comment: [] });
-            this.props.Appstore.getPosts(`hot=true`, 1);
+            this.props.Appstore.getPosts(`type=hot`, 1);
         } else if (location.pathname === "/search") {
             const search = utils.search(location.search.split("?")[1]);
             this.props.Appstore.setState("app", { read_article: [], read_comment: [] });
             this.props.Appstore.getPosts(`search=${search.query}`, 1);
-        } else if (location.pathname === "/about") {
-            this.props.Appstore.getPosts("search=关于本项目", 1);
+        } else if (location.pathname === "/follow") {
+            this.props.Appstore.getPosts("type=follow", 1);
         }
     }
 
