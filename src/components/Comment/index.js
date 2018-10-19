@@ -144,7 +144,7 @@ export default class Comment extends Component {
     }
 
     onRemove() {
-        const { comments, count } = this.state;
+        const { comments, currentPage, sort, count } = this.state;
 
         const { posts_id, author_id } = this.props;
         const comment_id = comments[this.index].comment.comment_id;
@@ -152,14 +152,22 @@ export default class Comment extends Component {
 
         if (user[0] === this.props.Appstore.id) {
             ajax.removeComment({ comment_id, posts_id, author_id, user }).then(() => {
-                comments.splice(this.index, 1);
-                this.setState({
-                    comments: comments,
-                    count: count - 1,
-                    visibility: false,
-                    description: null
-                });
-                this.props.Appstore.comment_count("remove", this.props.p_index);
+                if(comments.length-1 > 0){
+                    comments.splice(this.index, 1);
+                    this.props.Appstore.comment_count("remove", this.props.p_index);
+                    this.setState({
+                        comments: comments,
+                        count: count - 1,
+                        visibility: false,
+                        description: null
+                    });
+                }
+                else{
+                    const pages = currentPage - 1 > 0 ? currentPage-1 : 1;
+                    this.props.Appstore.comment_count("remove", this.props.p_index);
+                    this.setState({ visibility: false, description: null });
+                    this.getComment(posts_id, pages, sort);
+                }
             });
         }
     }
@@ -204,33 +212,21 @@ export default class Comment extends Component {
             count,
             page,
             visibility,
-            description
+            description,
+            currentPage
         } = this.state;
         return (
             <React.Fragment key="fesd">
                 <div className="comment" ref={this.refc}>
-                    <CommentHeader
-                        sort={sort}
-                        count={count}
-                        setReversed={this.setReversed}
+                    <CommentHeader sort={sort} count={count} setReversed={this.setReversed}/>
+                    {loading ? <Loading /> : <CommentList comments={comments} user_id={this.props.Appstore.id} action={this.action}/>}
+                    <CommentPage
+                        ulStyle="comment_page"
+                        currentStyle="current_page"
+                        count={page}
+                        setPage={this.setPage}
+                        currentPage={currentPage}
                     />
-                    {loading ? (
-                        <Loading />
-                    ) : (
-                        <React.Fragment key="abcd">
-                            <CommentList
-                                comments={comments}
-                                user_id={this.props.Appstore.id}
-                                action={this.action}
-                            />
-                            <CommentPage
-                                ulStyle="comment_page"
-                                currentStyle="current_page"
-                                count={page}
-                                setPage={this.setPage}
-                            />
-                        </React.Fragment>
-                    )}
                     <CommentTextarea refx={this.refx} create={this.create} />
                 </div>
                 <CommentRmoeve

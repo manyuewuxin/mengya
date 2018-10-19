@@ -2,8 +2,7 @@ import { observable, action, computed } from "mobx";
 import { app as ajax } from "../request";
 
 class Appstore {
-    @observable
-    app = {
+    @observable app = {
         posts: [], //文章
         user: null, //用户
         order: [], //顺序
@@ -21,8 +20,7 @@ class Appstore {
         collect_user: null
     };
 
-    @observable
-    header = {
+    @observable header = {
         message: null, //用户消息
         read_count: 0, //阅读初始化消息计数
         page: 1, //消息页
@@ -31,8 +29,7 @@ class Appstore {
         left: 0
     };
 
-    @observable
-    modal = {
+    @observable modal = {
         open: null, //type
         position: null,
         posts_id: null,
@@ -40,14 +37,14 @@ class Appstore {
         message: null //全局提示消息
     };
 
-    @observable
-    hove = {
+    @observable hove = {
         opacity: 0,
         position: null,
         hove_type: null,
         article_type: null,
         author_id: null
     };
+
     read_article_top = null;
     queue = null;
 
@@ -121,8 +118,7 @@ class Appstore {
                 ajax.getUser(),
                 ajax.getMessage(1)
             ]).then(([p, o, u, m]) => {
-                if (p.posts.length > 0 && this.app.path === path) {
-                    //区分类型和搜索
+                if (p.posts.length > 0 && this.app.path === path) { //区分类型和搜索
                     this.setState("app", {
                         order: o.order,
                         posts: this.app.posts.concat(p.posts),
@@ -131,7 +127,8 @@ class Appstore {
                         update: false,
                         posts_loading: false
                     });
-                } else if (this.app.path !== path) {
+                } 
+                else if (this.app.path !== path) {
                     this.setState("app", {
                         order: o.order,
                         posts: [].concat(p.posts),
@@ -346,6 +343,16 @@ class Appstore {
                 : this.app.read_comment.push(index);
         } else {
             this.setMessage({ text: "read_article_comment params error", is: false });
+        }
+    }
+
+    @action
+    removeArticle(index){
+        if(typeof index === "number" && Number.isNaN(index) === false){
+            this.app.posts.splice(index,1);
+        }
+        else{
+            this.setMessage({ text: "removeArticle params error", is: false });
         }
     }
 }

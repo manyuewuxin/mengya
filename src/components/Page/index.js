@@ -9,6 +9,7 @@ export default class Page extends Component {
         currentStyle: PropTypes.string.isRequired,
         setPage: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
         count: PropTypes.number.isRequired,
+        currentPage: PropTypes.number.isRequired,
         history: PropTypes.object
     };
     constructor(props) {
@@ -38,9 +39,12 @@ export default class Page extends Component {
     UNSAFE_componentWillUpdate(nextProps, nextState) {
         if (nextProps.count !== this.props.count) {
             this.arr = [];
-            this.init(nextState.page, nextProps.count);
+            this.init(nextProps.currentPage, nextProps.count);
+            this.build(nextProps.currentPage, nextProps.count); //在render抽离出来
         }
-        this.build(nextState.page, nextProps.count); //在render抽离出来
+        else{
+            this.build(nextState.page, nextProps.count); //在render抽离出来
+        }
     }
 
     setPage(page) {

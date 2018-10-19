@@ -44,6 +44,7 @@ export default class People extends Component {
                     <Page
                         count={Peoplestore.count}
                         setPage={`${location.pathname}?`}
+                        currentPage={Peoplestore.currentPage}
                         currentStyle="posts_ispage"
                         ulStyle="page"
                     />

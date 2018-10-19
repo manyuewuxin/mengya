@@ -4,18 +4,13 @@ import appstore from "./Appstore";
 import xss from "xss";
 
 class Editorstore {
-    @observable
-    image = null;
-    @observable
-    type = [];
-    @observable
-    title = "";
-    html = null;
-    @observable
-    message = null;
-    @observable
-    loading = true;
+    @observable image = null;
+    @observable type = [];
+    @observable title = "";
+    @observable message = null;
+    @observable loading = true;
 
+    html = null;
     is_update = false;
     timeID = null;
     article = null;
