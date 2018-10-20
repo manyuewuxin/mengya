@@ -42,8 +42,8 @@ export default class ArticleAction extends Component {
                 </div>
                 {is_my_people ? (
                     <React.Fragment>
-                        <div data-remove={index}>删除</div>
-                        <div data-editor={index}>编辑</div>
+                        <div data-remove="remove" data-index={index}>删除</div>
+                        <div data-editor="editor" data-index={index}>编辑</div>
                     </React.Fragment>
                 ) : null}
                 {open_article ? (

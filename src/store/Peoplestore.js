@@ -66,10 +66,22 @@ class Peoplestore {
         }
     }
 
+    @action
+    remove_article(index) {
+        if (Number.isInteger(index) && Number.isNaN(index) === false) {
+            this.index = index;
+            this.description = { title: "你确定要删除该文章吗？" };
+            this.visibility = true;
+        } else {
+            appstore.setMessage({ text: "remove_article params error", is: false });
+        }
+    }
+
     @action.bound
     ok_removeArticle() {
-        const { image, _id } = appstore.posts[this.index];
-        Promise.resolve().then(() => {
+        if(Number.isInteger(this.index)){
+            const { image, _id } = appstore.posts[this.index];
+            Promise.resolve().then(() => {
                 return image !== null
                     ? app.removeFile({ url: image, folder: "editor" })
                     : true;
@@ -80,28 +92,21 @@ class Peoplestore {
             .then(() => {
                 if(appstore.posts.length-1 > 0){
                     appstore.removeArticle(this.index);
-                    return Promise.resolve({ people: null });
                 }
                 else{
                     const page = this.currentPage - 1 > 0 ? this.currentPage - 1 : 1;
-                    return this.getPeople("article", this.people_user_id, page);
+                    this.getPeople("article", this.people_user_id, page);
                 }
-            }).then(({ people, count })=>{
-                if(Array.isArray(people)){
-                    appstore.setState("app", { posts: people });
-                    this.setState({
-                        count: count,
-                        visibility: false,
-                        description: null
-                    });
-                }
-                else {
-                    this.setState({
-                        visibility: false,
-                        description: null
-                    });                    
-                }
+                this.setState({
+                    visibility: false,
+                    description: null,
+                    index: null
+                });
             });
+        }
+        else{
+            appstore.setMessage({ text: "removeArticle index is error ", is: false });
+        }
     }
 
     @action 
@@ -116,34 +121,31 @@ class Peoplestore {
 
     @action.bound
     ok_removeCollect() {
-        const { _id, image } = this.people[this.index];
+        if(Number.isInteger(this.index)){
+            const { _id, image } = this.people[this.index];
 
             app.removeFile({ url: image, folder: "collect" })
             .then(() => {
                 return people.removeCollect({ collect_id: _id });
-            }).then(()=>{
+            })
+            .then(()=>{
                 if(this.people.length-1 > 0){
                     this.removeCollect(this.index);
-                    return Promise.resolve({ people: null});
                 }
                 else{
                     const page = this.currentPage - 1 > 0 ? this.currentPage - 1 : 1;
-                    return this.getPeople("collect", this.people_user_id, page);
-                }
-            }).then(({ people, count })=>{
-                if(Array.isArray(people)){
-                    this.setState({
-                        people: people,
-                        count: count,
-                        visibility: false,
-                        description: null
-                    });                    
+                    this.getPeople("collect", this.people_user_id, page);
                 }
                 this.setState({
                     visibility: false,
-                    description: null
-                }); 
+                    description: null,
+                    index: null
+                });
             });
+        }
+        else{
+            appstore.setMessage({ text: "removeCollect index is error", is: false });
+        }
     }
 
     @action.bound
@@ -151,22 +153,6 @@ class Peoplestore {
         this.index = null;
         this.visibility = false;
         this.description = null;
-    }
-
-    @action
-    remove_article(index, page) {
-        if (
-            Number.isInteger(index) &&
-            Number.isInteger(page) &&
-            Number.isNaN(index) === false
-        ) {
-            this.index = index;
-            this.page = page;
-            this.description = { title: "你确定要删除该文章吗？" };
-            this.visibility = true;
-        } else {
-            appstore.setMessage({ text: "remove_article params error", is: false });
-        }
     }
 
     @action

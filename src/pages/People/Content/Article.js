@@ -26,14 +26,11 @@ export default class PeopleArticle extends Component {
     action(e) {
         if (e.target.dataset.remove) {
             e.stopPropagation(); //如果不是，那就继续向上冒泡
-            const search = utils.search(this.props.location.search.split("?")[1]);
-            this.props.Peoplestore.remove_article(
-                Number(e.target.dataset.remove),
-                search.page || 1
-            );
-        } else if (e.target.dataset.editor) {
+            this.props.Peoplestore.remove_article(Number(e.target.dataset.index));
+        } 
+        else if (e.target.dataset.editor) {
             e.stopPropagation();
-            const index = Number(e.target.dataset.editor);
+            const index = Number(e.target.dataset.index);
             const { posts } = this.props.Appstore;
             this.props.history.push(`/write#${posts[index]._id}`);
         }
