@@ -124,8 +124,7 @@ class Appstore {
                         posts: this.app.posts.concat(p.posts),
                         page: page + 1,
                         path: path,
-                        update: false,
-                        posts_loading: false
+                        update: false
                     });
                 } 
                 else if (this.app.path !== path) {
@@ -134,11 +133,10 @@ class Appstore {
                         posts: [].concat(p.posts),
                         page: page + 1,
                         path: path,
-                        update: false,
-                        posts_loading: false
+                        update: false
                     });
                 }
-                this.setState("app", { user: u.user });
+                this.setState("app", { user: u.user, posts_loading: false });
                 this.setUserMessage(m, 1);
             });
         } else {
