@@ -17,6 +17,7 @@ export default class MessageList extends Component {
         for(let i = 0; i < message.length; i++){
             if(message[i].posts.length>0){
                 const key = Math.random().toString(36).substring(2, 6);
+                const m = message[i];
                 if (m.message.message_type === "reply_posts") {
                     list.push(
                         <li key={key}>
