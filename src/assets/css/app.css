@@ -305,15 +305,24 @@ i{
 .show_message ul li:nth-child(1){
 	border:none !important;
 }
+.show_message ul li{
+	display: flex;
+	flex-wrap: nowrap;
+}
 .show_message ul li a{
 	font-size: 14px;
 	color: #1398D0;
 }
-
+.show_message .text{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	flex: 1;
+}
 .show_message ul li span{
 	font-size: 14px;
 	color: #1a1a1a;
-	margin: 0 5px;
+	margin: 0 3px;
 }
 
 .icon_message{

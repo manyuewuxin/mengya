@@ -25,7 +25,7 @@ export default class MessageList extends Component {
                                 {m.author[0].name}
                             </Link>
                             <span>评论了你的文章</span>
-                            <Link to={`/p/${m.posts[0]._id}`}>{m.posts[0].title}</Link>
+                            <Link to={`/p/${m.posts[0]._id}`} className="text">{m.posts[0].title}</Link>
                         </li>
                     );
                 } else if (m.message.message_type === "reply_comment") {
@@ -35,7 +35,7 @@ export default class MessageList extends Component {
                                 {m.author[0].name}
                             </Link>
                             <span>在文章</span>
-                            <Link to={`/p/${m.posts[0]._id}`}>{m.posts[0].title}</Link>
+                            <Link to={`/p/${m.posts[0]._id}`} className="text">{m.posts[0].title}</Link>
                             <span>回复了你的评论</span>
                         </li>
                     );
