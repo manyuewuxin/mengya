@@ -35,11 +35,14 @@ export default class Message extends Component {
             this.time = null;
         }
         this.time = window.setTimeout(() => {
-            const scrollTop = Math.round(document.documentElement.scrollTop); //获取滚动高度像素
-            const scrollHeight = scrollTop + window.innerHeight; //滚动高度像素+浏览器窗口屏幕可见高度
-            if (scrollHeight >= document.documentElement.scrollHeight - 50) {
-                //等于或大于整个文档高度时也就是滚动到底部时执行请求
+            const scrollTop = Math.round(document.documentElement.scrollTop);
+            const scrollHeight = scrollTop + window.innerHeight; 
+            if (scrollHeight >= document.documentElement.scrollHeight) {
+
+
                 this.props.Appstore.getMessage(this.props.Appstore.header.page);
+                window.clearTimeout(this.time);
+                this.time = null;
             }
         }, 100);
     }

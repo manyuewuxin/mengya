@@ -21,7 +21,7 @@ class Appstore {
     };
 
     @observable header = {
-        message: null, //用户消息
+        message: [], //用户消息
         read_count: 0, //阅读初始化消息计数
         page: 1, //消息页
         init: false, //初始化打开消息
@@ -94,19 +94,6 @@ class Appstore {
             }
         } else {
             this.setMessage({ text: "setState params error", is: false });
-        }
-    }
-
-    setUserMessage(m, page) {
-        if (m && page) {
-            this.setState("header", {
-                message: m.message,
-                read_count: m.read_count,
-                page: page + 1,
-                init: m.read_count !== this.header.read_count
-            });
-        } else {
-            this.setMessage({ text: "setUserMessage params error", is: false });
         }
     }
 
@@ -204,10 +191,21 @@ class Appstore {
         }
     }
 
+    setUserMessage(m, page) {
+        if (m.message.length > 0 && page) {
+            this.setState("header", {
+                message:this.header.message.concat(m.message),
+                read_count: m.read_count,
+                page: page + 1,
+                init: m.read_count !== this.header.read_count
+            });
+        }
+    }
+
     setter_message(open, left) {
         if (this.header.open === open) {
             this.setState("header", { open: null, left: 0 });
-        } else if (open === "message" && this.header.init) {
+        } else if (open === "message" && this.header.init && this.header.read_count > 0) {
             ajax.updateMessage().then(() =>
                 this.setState("header", {
                     open: open,
