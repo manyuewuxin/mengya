@@ -184,21 +184,21 @@ class Appstore {
     getMessage(page) {
         if (typeof page == "number") {
             ajax.getMessage(page).then((m) => {
-                this.setUserMessage(m, page);
+                this.setUserMessage(m, page, true);
             });
         } else {
             this.setMessage({ text: "getMessage params error", is: false });
         }
     }
 
-    setUserMessage(m, page) {
+    @action setUserMessage(m, page, is_update=false) { //第三个参数区分是滚动加载还是更换路由
         if (m.message.length > 0 && page) {
-            this.setState("header", {
-                message:this.header.message.concat(m.message),
-                read_count: m.read_count,
-                page: page + 1,
-                init: m.read_count !== this.header.read_count
-            });
+            if(this.header.message.length===0 || is_update){
+                this.header.page = this.header.page + 1;
+            }
+            this.header.init = m.read_count !== this.header.read_count;
+            this.header.read_count = m.read_count;
+            this.header.message =  is_update ? this.header.message.concat(m.message) : m.message;
         }
     }
 
